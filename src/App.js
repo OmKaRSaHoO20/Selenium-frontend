@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function App() {
   const [trends, setTrends] = useState([]);
   const [timestamp, setTimestamp] = useState('');
+  const [Date, setDate] = useState('');
   const [ipAddress, setIpAddress] = useState('');
   const [jsonData, setJsonData] = useState({});
   const [showResults, setShowResults] = useState(false);
@@ -16,6 +17,7 @@ function App() {
       .then(data => {
         setTrends(data.Topics.map(topic => topic.Topic));
         setTimestamp(data.Time);
+        setDate(data.Date);
         setIpAddress(data.IP);
         setJsonData(data);
         setShowResults(true);
@@ -32,7 +34,7 @@ function App() {
             <button onClick={handleClick}>Get Trending Topics</button>
             {showResults && (
               <div>
-                <p>These are the most happening topics as on {timestamp}</p>
+                <p>These are the most happening topics as on {Date} {timestamp} </p>
                 <ul>
                   {trends.map((trend, index) => (
                     <li key={index}>{trend}</li>
